@@ -1,16 +1,14 @@
-import { config } from 'dotenv';
-import express, { Application, NextFunction, Request, Response } from 'express';
+import express from "express";
+import mongoose from "mongoose";
+import { config } from "./config/config";
 
-config();
+const router = express();
 
-const app: Application = express();
-
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.send('Express server with TypeScript');
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
+mongoose
+  .connect(config.mongo.url)
+  .then(() => {
+    console.log("connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
