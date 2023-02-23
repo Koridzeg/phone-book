@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { Icontact } from "../interfaces/models";
+import { Icontact } from "../interfaces/contact.model";
 
 const contactSchema = new Schema({
   name: { type: String, required: true },
