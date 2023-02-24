@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .form-container {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .form-fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  
