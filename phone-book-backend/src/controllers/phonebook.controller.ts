@@ -8,8 +8,8 @@ export const createContact = async (req: Request, res: Response) => {
   try {
     const contact = await Contact.create({ name, surname, phone });
     res.status(201).json(contact);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to create contact" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to create contact", err });
   }
 };
 
@@ -17,8 +17,8 @@ export const getAllContacts = async (req: Request, res: Response) => {
   try {
     const contacts = await Contact.find();
     res.status(200).json(contacts);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to retrieve contacts" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to retrieve contacts", err });
   }
 };
 
@@ -32,7 +32,9 @@ export const updateContact = async (req: Request, res: Response) => {
       { new: true }
     );
     res.status(200).json(updateContact);
-  } catch (error) {}
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update contacts", err });
+  }
 };
 
 export const deleteContact = async (req: Request, res: Response) => {
@@ -41,6 +43,6 @@ export const deleteContact = async (req: Request, res: Response) => {
     const deleteContact = await Contact.findByIdAndDelete(id);
     res.status(200).json(deleteContact);
   } catch (err) {
-    res.status(500).json({ message: "error deleting contact", err });
+    res.status(500).json({ message: "Failed deleting contacts", err });
   }
 };
