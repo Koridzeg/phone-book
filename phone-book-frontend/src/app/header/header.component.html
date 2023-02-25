@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
     <span>Phone Book App</span>
     <span class="spacer"></span>
-    <button mat-button routerLink="/register">Register</button>
-    <button mat-button routerLink="/login">Login</button>
-</mat-toolbar>
+    <button *ngIf="!isAuthenticated()" mat-button routerLink="/register">Register</button>
+    <button *ngIf="!isAuthenticated()" mat-button routerLink="/login">Login</button>
+    <button *ngIf="isAuthenticated()" mat-button (click)="onLogoutClick()">Logout</button>
+  </mat-toolbar>
+  

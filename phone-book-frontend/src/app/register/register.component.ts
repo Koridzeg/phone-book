@@ -24,4 +24,6 @@ export class RegisterComponent {
       }
     );
   }
+
+  
 }
