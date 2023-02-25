@@ -1,5 +1,4 @@
 import { Component, ChangeDetectorRef, ViewChild, AfterViewInit } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { PhonebookService } from '../services/phonebooks.service';
 import { IContact } from '../types/types';
@@ -11,12 +10,13 @@ import { IContact } from '../types/types';
 })
 export class PhonebookComponent implements AfterViewInit {
   contacts: IContact[] = [];
+  selectedContact: IContact = { name: '', surname: '', phone: '' };
+  isEditing = false;
 
   @ViewChild(MatTable) table!: MatTable<IContact>;
 
   constructor(
     private phonebookService: PhonebookService,
-    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -35,4 +35,35 @@ export class PhonebookComponent implements AfterViewInit {
       this.table.renderRows(); // render the updated rows
     });
   }
+
+  deleteContact(id: string) {
+    this.phonebookService.deletePhonebook(id).subscribe(() => {
+      this.contacts = this.contacts.filter((contact) => contact._id !== id);
+      this.table.renderRows(); // render the updated rows
+    });
+  }
+
+  updateContact(contact: IContact) {
+    if (contact._id && this.selectedContact) {
+      this.phonebookService.updatePhonebook(contact, contact._id)
+        .subscribe((updatedContact) => {
+          const index = this.contacts.findIndex((c) => c._id === updatedContact._id);
+          this.contacts[index] = updatedContact;
+          this.table.renderRows();
+          this.isEditing = false;
+          this.selectedContact = {...contact};
+        });
+    }
+  }
+
+
+  editContact(contact: IContact) {
+    this.selectedContact = {...contact};
+    this.isEditing = true;
+  }
+
+  cancelEdit() {
+    this.isEditing = false;  
+  }
+
 }

@@ -26,7 +26,7 @@ export class PhonebookService {
   }
 
   getAllPhonebooks(): Observable<IContact[]> {
-    console.log('Getting all phoneboks...')
+    console.log('Getting all phoneboks...');
     const headers = this.getAuthHeader();
     return this.http
       .get<IContact[]>(this.apiUrl, { headers })
@@ -34,26 +34,26 @@ export class PhonebookService {
   }
 
   createPhonebook(phonebook: IContact): Observable<IContact> {
-    const headers = this.getAuthHeader().set('Content-Type', 'application/json');
-    return this.http.post<IContact>(this.apiUrl, phonebook, { headers }).pipe(
-      catchError(this.handleError),
-      tap((newContact) => {
-        this.contacts.push(newContact);
-      })
-    );
+    const headers = this.getAuthHeader();
+    return this.http
+      .post<IContact>(this.apiUrl, phonebook, { headers })
+      .pipe(catchError(this.handleError));
   }
 
-  updatePhonebook(phonebook: IContact): Observable<IContact> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.apiUrl}/${phonebook._id}`;
+  updatePhonebook(phonebook: IContact, id: string): Observable<IContact> {
+    const headers = this.getAuthHeader();
+    const url = `${this.apiUrl}/${id}`;
     return this.http
       .put<IContact>(url, phonebook, { headers })
       .pipe(catchError(this.handleError));
   }
 
   deletePhonebook(id: string): Observable<IContact> {
+    const headers = this.getAuthHeader();
     const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<IContact>(url).pipe(catchError(this.handleError));
+    return this.http
+      .delete<IContact>(url, { headers })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

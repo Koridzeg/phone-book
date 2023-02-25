@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -40,6 +41,7 @@ import { UserService } from './services/user.service';
     HttpClientModule,
     MatTableModule,
     MatIconModule,
+    MatDialogModule,
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
