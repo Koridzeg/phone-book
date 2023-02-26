@@ -10,6 +10,7 @@ import { User } from '../types/types';
 })
 export class RegisterComponent {
   user: User = { username: '', email: '', password: '', confirmPassword: '' };
+  emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -17,7 +18,7 @@ export class RegisterComponent {
     this.userService.register(this.user).subscribe(
       (response) => {
         console.log('registration succesfull', response);
-        this.router.navigate(['/login'])
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.log('Registration failed', error);
@@ -25,5 +26,19 @@ export class RegisterComponent {
     );
   }
 
-  
+  isFormValid(): boolean {
+    const minLength = 6;
+    const emailRegex = this.emailRegex;
+
+    return (
+      this.user.password.length >= minLength &&
+      this.user.confirmPassword.length >= minLength &&
+      this.user.password === this.user.confirmPassword &&
+      emailRegex.test(this.user.email)
+    );
+  }
+
+  isEmailValid(): boolean {
+    return this.emailRegex.test(this.user.email)
+  }
 }

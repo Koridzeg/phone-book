@@ -13,22 +13,23 @@
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput type="email" placeholder="Email" required [(ngModel)]="user.email" name="email"
-                />
+                <input matInput type="email" placeholder="Email" required [(ngModel)]="user.email" name="email"/>
+                <mat-error *ngIf="!isEmailValid()">Please enter a valid email address.</mat-error>
+
               </mat-form-field>
   
               <mat-form-field>
                 <input matInput type="password" placeholder="Password" required minlength="6" [(ngModel)]="user.password" name="password" />
-                <mat-error *ngIf="user.password.length < 6">Password must be at least 6 characters long</mat-error>
+                <mat-error *ngIf="user.password.length < 6">Password must be at least 6 </mat-error>
   
             </mat-form-field>
   
               <mat-form-field>
                 <input matInput type="password" placeholder="Confirm Password" required minlength="6" [(ngModel)]="user.confirmPassword" name="confirmPassword" />
-                <mat-error *ngIf="user.confirmPassword.length < 6">Password must be at least 6 characters long</mat-error>  
+                <mat-error *ngIf="user.confirmPassword.length < 6">Password must be at least 6 </mat-error>  
             </mat-form-field>
   
-              <button mat-raised-button color="primary">Register</button>
+              <button mat-raised-button color="primary" [disabled]="!isFormValid()">Register</button>
             </div>
           </form>
         </mat-card-content>

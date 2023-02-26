@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./reset-password.component.css'],
 })
 export class ResetPasswordComponent {
+  emailSent:boolean = false;
   constructor(private UserService: UserService) {}
 
   forgotPassword(email: string) {
