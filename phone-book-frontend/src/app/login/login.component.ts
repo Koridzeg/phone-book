@@ -11,16 +11,19 @@ import { LoggingUser } from '../types/types';
 export class LoginComponent {
   user: LoggingUser = { username: '', password: '', token: '' };
 
+  loginError: string = '';
+
   constructor(private userService: UserService, private router: Router) {}
 
   login() {
     this.userService.login(this.user).subscribe(
       (response) => {
         console.log('User Logged in!');
-        this.router.navigate(['/phonebooks'])
+        this.router.navigate(['/phonebooks']);
       },
       (error) => {
         console.log('Login failed', error);
+        this.loginError = 'Incorrect username or password';
       }
     );
   }

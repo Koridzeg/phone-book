@@ -9,18 +9,33 @@
         <form (ngSubmit)="login()">
           <div class="form-fields">
             <mat-form-field>
-              <input matInput placeholder="Username" [(ngModel)]="user.username" name="username" required>
+              <input
+                matInput
+                placeholder="Username"
+                [(ngModel)]="user.username"
+                name="username"
+                required
+              />
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required>
+              <input
+                matInput
+                type="password"
+                placeholder="Password"
+                [(ngModel)]="user.password"
+                name="password"
+                required
+              />
             </mat-form-field>
 
             <button mat-raised-button color="primary">Login</button>
-
+            <mat-error *ngIf="loginError">{{ loginError }}</mat-error>
           </div>
         </form>
-        <button mat-button color="primary" routerLink="/reset">Forgot Password?</button>
+        <button mat-button color="primary" routerLink="/reset">
+          Forgot Password?
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
