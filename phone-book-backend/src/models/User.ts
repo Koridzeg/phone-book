@@ -23,6 +23,8 @@ const userSchema = new Schema({
     minlength: 6,
   },
   createdAt: { type: Date, default: Date.now },
+  passwordResetToken: String,
+  passwordResetExpires: Date,
 });
 
 export default mongoose.model<IUser>("User", userSchema);
