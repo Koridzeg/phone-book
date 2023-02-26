@@ -5,7 +5,12 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { LoggingUser, User } from '../types/types';
+import {
+  ForgotPasswordResponse,
+  LoggingUser,
+  ResetPasswordResponse,
+  User,
+} from '../types/types';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -37,6 +42,23 @@ export class UserService {
       );
   }
 
+  forgotPassword(email: string): Observable<ForgotPasswordResponse> {
+    return this.http.post<ForgotPasswordResponse>(
+      `${this.apiUrl}forgot-password`,
+      { email }
+    );
+  }
+
+  resetPassword(
+    token: string,
+    password: string
+  ): Observable<ResetPasswordResponse> {
+    return this.http.post<ResetPasswordResponse>(
+      `${this.apiUrl}reset/${token}`,
+      { password }
+    );
+  }
+
   logout() {
     localStorage.removeItem('token');
   }
@@ -45,7 +67,6 @@ export class UserService {
     const token = localStorage.getItem('token');
     return !!token;
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

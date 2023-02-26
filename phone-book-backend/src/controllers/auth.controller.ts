@@ -91,13 +91,15 @@ export const forgotPassword = async (req: Request, res: Response) => {
       },
     });
 
+    const resetUrl = `${config.front.url}/reset/${resetPasswordToken}`;
+
     const mailOptions = {
       to: user.email,
       from: "recoveryrecover01@gmail.com",
       subject: "Password reset",
       text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
         Please click on the following link, or paste this into your browser to complete the process:\n\n
-        http://${req.headers.host}/api/auth/reset/${resetPasswordToken}\n\n
+        ${resetUrl}\n\n
         If you did not request this, please ignore this email and your password will remain unchanged.\n`,
     };
 
@@ -119,8 +121,6 @@ export const resetPassword = async (req: Request, res: Response) => {
       passwordResetToken: req.params.token,
       passwordResetExpires: { $gt: Date.now() },
     });
-
-    console.log(user?.passwordResetToken);
 
     if (!user) {
       return res.status(400).json({ message: "Invalid token" });

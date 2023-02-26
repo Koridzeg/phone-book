@@ -26,7 +26,6 @@ export class PhonebookService {
   }
 
   getAllPhonebooks(): Observable<IContact[]> {
-    console.log('Getting all phoneboks...');
     const headers = this.getAuthHeader();
     return this.http
       .get<IContact[]>(this.apiUrl, { headers })

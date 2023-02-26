@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PhonebookComponent } from './phonebook/phonebook.component';
 import { UserService } from './services/user.service';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordTokenComponent } from './reset-password-token/reset-password-token.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { UserService } from './services/user.service';
     RegisterComponent,
     LoginComponent,
     PhonebookComponent,
+    ResetPasswordComponent,
+    ResetPasswordTokenComponent,
   ],
   imports: [
     BrowserModule,

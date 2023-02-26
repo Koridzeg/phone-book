@@ -17,3 +17,11 @@ export interface IContact {
   surname:string;
   phone:string;
 }
+
+export interface ForgotPasswordResponse {
+  message: string;
+}
+
+export interface ResetPasswordResponse { 
+  message: string;
+}
