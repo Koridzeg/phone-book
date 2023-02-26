@@ -12,8 +12,6 @@ const SERVER_PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 
 const JWT_SECRET = crypto.randomBytes(64).toString("hex");
 
-const SENDINBLUE_API = process.env.SENDINBLUE_API_KEY;
-
 export const config = {
   mongo: {
     url: MONGO_URL,
@@ -23,9 +21,6 @@ export const config = {
   },
   jwt: {
     secret: JWT_SECRET,
-  },
-  sendinblue: {
-    api: SENDINBLUE_API,
   },
   front: {
     url: FRONT_URL,

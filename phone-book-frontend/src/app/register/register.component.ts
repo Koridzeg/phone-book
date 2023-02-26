@@ -34,7 +34,8 @@ export class RegisterComponent {
       this.user.password.length >= minLength &&
       this.user.confirmPassword.length >= minLength &&
       this.user.password === this.user.confirmPassword &&
-      emailRegex.test(this.user.email)
+      emailRegex.test(this.user.email) && this.user.username.length >= 3
+      
     );
   }
 

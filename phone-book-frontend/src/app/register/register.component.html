@@ -9,11 +9,12 @@
           <form (ngSubmit)="register()">
             <div class="form-fields">
               <mat-form-field>
-                <input matInput placeholder="Username" required [(ngModel)]="user.username" name="username" />
+                <input matInput placeholder="Username" required minlength="3" [(ngModel)]="user.username" name="username" />
+                <mat-error *ngIf="user.username.length < 3">Username must be at least 3 </mat-error>
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput type="email" placeholder="Email" required [(ngModel)]="user.email" name="email"/>
+                <input matInput type="email" placeholder="Email" required [(ngModel)]="user.email" name="email" [pattern]="emailRegex"/>
                 <mat-error *ngIf="!isEmailValid()">Please enter a valid email address.</mat-error>
 
               </mat-form-field>
